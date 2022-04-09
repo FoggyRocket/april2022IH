@@ -1,0 +1,38 @@
+{
+  "name": "lab-unit-testing",
+  "description": "Introduces automated testing",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watchAll"
+  },
+  "dependencies": {
+    "jest": "^26.6.3",
+    "jest-junit": "^12.0.0"
+  },
+  "devDependencies": {
+    "jest-html-reporter": "^3.3.0"
+  },
+  "jest": {
+    "reporters": [
+      "default",
+      [
+        "./node_modules/jest-html-reporter",
+        {
+          "pageTitle": "Lab Solution",
+          "outputPath": "lab-solution.html"
+        }
+      ]
+    ]
+  },
+  "jest-junit": {
+    "suiteNameTemplate": "{filepath}",
+    "classNameTemplate": "{classname}",
+    "titleTemplate": "{title}"
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "singleQuote": true
+  }
+}
