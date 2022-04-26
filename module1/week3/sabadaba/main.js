@@ -285,10 +285,18 @@ clearTimeout(timeoutExmaple)
 const interEx = setInterval(()=>{
     console.log("soy bien pro")
 },1000)
-
+/**
+ *  function setInterval(cb,ms){
+ *  //....
+ *  cb()
+ * 
+ *  return id
+ * }
+ *  setIterval( ()=>{}, 1000 )
+ */
 console.log("que es interval",interEx)
 
 setTimeout(()=>{
     clearInterval(interEx)
     console.log("ya pare la alarma")
-},10000)
+} ,10000)
