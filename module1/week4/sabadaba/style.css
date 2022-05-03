@@ -1,0 +1,18 @@
+form{
+    width: 400px;
+}
+
+/* 
+    * universal
+    a nodo (etiqueta)
+    .perro (class)
+    #gato  (id)
+*/
+
+
+.IH22-List-Card{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
