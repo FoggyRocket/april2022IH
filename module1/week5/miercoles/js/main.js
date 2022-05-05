@@ -62,7 +62,7 @@ function drawEnemies(){
     armyEnemy.forEach((enemy,index_enemy)=>{
         enemy.draw()
 
-if( mario.collision(enemy) ){
+    if( mario.collision(enemy) ){
         console.log("me esta tocando!!!")
         requestId = undefined
         bg.gameOver()
