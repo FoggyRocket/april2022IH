@@ -89,4 +89,32 @@ class Mario extends Character{
         }
         ctx.drawImage(this.imageOfficial,this.x,this.y,this.width,this.height)
     }
+
+
+    collision(item){
+        return (
+            this.x < item.x + item.width &&
+            this.x + this.width > item.x &&
+            this.y < item.y + item.height &&
+            this.y + this.height > item.y
+        )
+    }
+}
+
+
+
+class Enemy extends Character{
+    constructor(w,h,y){
+        //y es random
+        super(canvas.width, y ,w,h)
+        this.image = new Image();
+        this.image.src = "images/koopa.png"
+    }
+
+
+    draw(){
+       this.x -= 4;
+
+        ctx.drawImage(this.image,this.x,this.y,this.width,this.height)
+    }
 }
