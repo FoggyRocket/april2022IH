@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBS</title>
+</head>
+<body>
+    <h1>Vista dinamica!!!</h1>
+    <p>Lost datos del alumno son?</p>
+    <p>Hola {{name}} </p>
+    <p>tu edad es: {{age}}</p> 
+    {{!-- if hbs --}}
+
+    {{#if lastName}}
+        <p>Tu apellido es: {{lastName}}</p>
+    {{/if}}
+
+    {{!-- if else hbs --}}
+
+    {{#if food}}
+        <p>Si tienes comida</p>
+    {{else}}
+        <p>Tengo hambre!!!!</p>
+    {{/if}}
+
+    {{!-- if else if hbs --}}
+    {{#if status}}
+        <p>Tu estatus es verdaro</p>
+    {{else if work}}
+        <p>Estas trabajando</p>
+    {{/if}}
+
+    {{!-- unless !negacion --}}
+    {{#unless cat}}
+        <h4>WARNING! We can't find the cat(se fue con otra familia)</h4>
+    {{/unless}}
+
+    {{!-- each renderiza o crea una lista dinamica del numero de elementos del array u object --}}
+    <ul>
+        {{#each pets}}
+            <li>{{name}} su edad es:{{age}}</li>
+        {{/each}}
+    </ul>
+
+</body>
+</html>
