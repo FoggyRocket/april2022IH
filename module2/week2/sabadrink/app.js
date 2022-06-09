@@ -107,9 +107,7 @@ app.get("/perro/:perroId/breed/:breed",(req,res,next)=>{
 
 app.get("*",(req,res,next)=>{
     console.log("los params 404")
-
     res.send(`No existe!!! u.u`)
-
 })
 
 function validatePassword(req,res,next){
