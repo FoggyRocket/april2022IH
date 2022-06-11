@@ -31,6 +31,7 @@ const dogRoutes = require("./routes/dog.routes")
 app.use("/", index);
 //www.tinderperro.com/dogs
 app.use("/dogs",dogRoutes)
+//app.use("/gatitos",catRoutes) list update remove
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

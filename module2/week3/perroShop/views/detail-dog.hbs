@@ -1,0 +1,18 @@
+
+
+<div>
+    <h2>{{name}}</h2>
+    <p>Edad:{{age}}</p>
+    <p>¿Esta disponible? 
+        {{#if isAvailable}}
+            Si, aun busca pareja
+        {{else}}
+            ya te lo ganaron u.u
+        {{/if}}
+    </p>
+    <p>Su sexo es: {{gender}}</p>
+    {{!-- nombre del dueño --}}
+    <p>El Dueño: {{_owner.username}}</p>
+</div>
+
+<a href="/dogs/list">Ir a la lista</a>

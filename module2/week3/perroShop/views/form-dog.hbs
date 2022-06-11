@@ -1,9 +1,16 @@
 <h1>Crear perro</h1>
-<form action="/create-dog" method="post">
+<form action="/dogs/create-dog" method="POST">
     <label>Nombre</label>
-    <input>
+    <input name="name" placeholder="Nombre de tu kan">
     <label>Genero</label>
-    <input>
+    <input name="gender" placeholder="Sexo?" >
+
+    <label>Edad</label>
+    <input name="age" placeholder="0">
+
+    {{!-- Esto es la version mas basica!!! osea no es recomendable hacerlo --}}
+    <label>De quien es?</label>
+    <input name="_owner" placeholder="1234567890">
 
     <button type="submit">Enviar</button>
 </form>

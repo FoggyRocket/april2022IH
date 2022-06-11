@@ -1,0 +1,16 @@
+<h1>Actualizar perro</h1>
+<form action="/dogs/update-dog/{{_id}}" method="POST">
+    <label>Nombre</label>
+    <input name="name" placeholder="Nombre de tu kan" value="{{name}}">
+    <label>Genero</label>
+    <input name="gender" placeholder="Sexo?" value="{{gender}}" >
+
+    <label>Edad</label>
+    <input name="age" placeholder="0" value="{{age}}">
+
+    <label>Esta disponible?</label>
+    <input name="isAvailable" placeholder="true || si" value={{isAvailable}}>
+
+    <button type="submit">Enviar</button>
+</form>
+

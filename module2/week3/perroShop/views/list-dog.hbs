@@ -4,6 +4,21 @@
 
 <ul>
     {{#each dogs }}
-        <li>{{name}} es: {{gender}}</li>
+     <li>
+        <a href="/dogs/detail/{{_id}}">
+           {{name}} es: {{gender}}
+        </a>
+
+        <a href="/dogs/update-dog/{{_id}}">Editar</a>
+
+        <a href="/dogs/delete/{{_id}}">Borrar</a>
+     </li>
     {{/each}}
 </ul>
+{{!--  www.tinderperro.com/ 
+    entramos a una ruta!!
+--}}
+<a href="/dogs/create-dog" >Crear un nuevo perro</a>
+
+{{!-- solo html entrar a un archivo --}}
+{{!-- <a href="../views/home.html" >Crear un nuevo perro</a> --}}

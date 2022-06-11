@@ -1,1 +1,10 @@
-<h1>Felicidades has creado un perro llamado {{name}}</h1>
+{{#if isDelete}}
+    <h1>Has borrado un perro</h1>
+{{else if isEdit}}
+  <h1>Felicidades has actualizado un perro {{name}}</h1>
+{{else}}
+  <h1>Felicidades has creado un perro llamado {{name}}</h1>
+{{/if}}
+
+
+<a href="/dogs/list">Ir a lista</a>
