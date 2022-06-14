@@ -1,0 +1,16 @@
+{{#if isEdit}}
+    <h1>Ha actualizado un usuario {{username}}</h1>
+{{else if isDelete}}
+    <h1>Se borro un usuario!</h1>
+{{else}}
+    <h1>Has creado un nuevo usuario llamado {{username}}</h1>
+{{/if}}
+
+<a href="/">Regresar al home</a>
+
+{{!-- eliminqr ejemplo --}}
+<form action="/{{id}}" method="POST">
+
+    <button type="submit">Eliminar</button>
+
+</form>
