@@ -13,6 +13,10 @@ router.get("/", (req, res, next) => {
 //signup
 
 router.get("/signup",(req,res,next)=>{
+    if(req.session.currentUser){
+        return res.redirect("/user/profile")
+    }
+
     res.render("auth/authForm",{isSignup:true})
 });
 router.post("/signup", async (req,res,next)=>{
@@ -67,7 +71,11 @@ router.post("/signup", async (req,res,next)=>{
         const username = `${firstElement[0]}-${salt}`;
         //3
         const user = await User.create({...restUser, username, password:passHashed, email})
-        res.redirect(`/user/profile/${user._id}`)
+        //v1
+        //res.redirect(`/user/profile/${user._id}`)
+        //v2
+        req.session.currentUser = user;
+        res.redirect("/user/profile")
 
     }catch(error){
         //v2
@@ -95,7 +103,102 @@ router.post("/signup", async (req,res,next)=>{
 
 //Login
 router.get("/login",(req,res,next)=>{
+    console.log("el session===>",req.session)
+    if(req.session.currentUser){
+        return res.redirect("/user/profile")
+    }
     res.render("auth/authForm")
 });
+router.post("/login",(req,res,next)=>{
+    const {email, password} = req.body
+    if(!password || !password.length || !email || !email.length ){
+        //v2
+        const errorMessage = ["Debes agregar un correo y una contraseña"]
+        return res.render('auth/authForm',{errorMessage})
+    }
+    //validar la contraseña
+    if( !password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/)){
+        //v2
+        const errorMessage=["La contraseña debe contener al menos una numero, etc..."]
+        return res.render("auth/authForm",{errorMessage})
+    }
+    if(!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
+        //v2
+        const errorMessage = ["el correo no tiene formato valido"]
+        return res.render("auth/authForm",{errorMessage})
+    }
 
+    User.findOne({email})
+    .then(user=>{
+
+        //ver si el email esta ya registrado
+        if(!user){
+            const errorMessage = ["El correo o contraseña es incorrecto"]
+            return res.render("auth/authForm",{errorMessage})
+        }
+
+        //comparar la contraseña
+        if( !bcryptjs.compareSync(password, user.password)){
+            const errorMessage = ["El correo o contraseña es incorrecto"]
+            return res.render("auth/authForm",{errorMessage})
+        }
+
+        //v1 terminar
+        // res.redirect(`/user/profile/${user._id}`)
+        //v2 session 
+        req.session.currentUser = user;
+        res.redirect("/user/profile")
+    })
+    .catch(error=>{
+        console.log("el error",error)
+        const errorMessage = ["Intentalo mas tarde"]
+        return res.render("auth/authForm",{errorMessage})
+    })
+})
+
+
+//profile
+router.get("/profile",(req,res,next)=>{
+    //v1
+    // const {id} = req.params
+    // User.findById(id)
+    // .then(user=>{
+    //     console.log("user",user)
+    //   res.render("user/profile",user)
+    // })
+    // .catch(error=>{
+    //   next(error)
+    // })
+
+    //v2
+    //protected
+    if(!req.session.currentUser){
+        return res.redirect("/user/login")
+    }
+
+    res.render("user/profile",req.session.currentUser)
+});
+
+/*
+router.get("/profile/:id", async (req,res,next)=>{
+    try{
+        const {id} = req.params
+        const user = await User.findById(id)
+        res.render("user/profile",user)
+    }catch(error){
+        next(error)
+    }
+})
+*/
+//Logout
+
+router.get("/logout",(req,res,next)=>{
+    req.session.destroy((err)=>{
+        if(err){ 
+            next(err)
+        }
+        res.redirect("/user/login")
+
+    })
+})
 module.exports = router;
