@@ -1,0 +1,16 @@
+
+
+{{!-- un apeticion  --}}
+<h1>PErros</h1>
+
+<script>
+    axios({
+  method:"get",
+  url:"https://rickandmortyapi.com/api/character"
+})
+.then(res=>{
+  console.log("Respuesta en perros",res)
+})
+//400 --> error
+.catch(error=>console.log("error en perros",error))
+</script>
