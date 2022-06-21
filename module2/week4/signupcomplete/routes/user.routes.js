@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const User = require("../models/User.model");
 const bcryptjs = require("bcryptjs");
+const isLoggedIn = require("../middleware/isLoggedIn");
+const isLoggedOut = require("../middleware/isLoggedOut")
 /* GET home page */
 //www.tinderperros.com/user/
 //www.tinderperros.com/user
@@ -11,12 +13,9 @@ router.get("/", (req, res, next) => {
 //CRUD
 
 //signup
-
-router.get("/signup",(req,res,next)=>{
-    if(req.session.currentUser){
-        return res.redirect("/user/profile")
-    }
-
+                        //middle --> callbackFunction
+router.get("/signup", isLoggedOut, (req,res,next)=>{
+    
     res.render("auth/authForm",{isSignup:true})
 });
 router.post("/signup", async (req,res,next)=>{
@@ -102,11 +101,7 @@ router.post("/signup", async (req,res,next)=>{
 })
 
 //Login
-router.get("/login",(req,res,next)=>{
-    console.log("el session===>",req.session)
-    if(req.session.currentUser){
-        return res.redirect("/user/profile")
-    }
+router.get("/login",isLoggedOut ,(req,res,next)=>{
     res.render("auth/authForm")
 });
 router.post("/login",(req,res,next)=>{
@@ -158,7 +153,8 @@ router.post("/login",(req,res,next)=>{
 
 
 //profile
-router.get("/profile",(req,res,next)=>{
+// protected  v3 pro
+router.get("/profile",isLoggedIn,(req,res,next)=>{
     //v1
     // const {id} = req.params
     // User.findById(id)
@@ -172,9 +168,9 @@ router.get("/profile",(req,res,next)=>{
 
     //v2
     //protected
-    if(!req.session.currentUser){
-        return res.redirect("/user/login")
-    }
+    // if(!req.session.currentUser){
+    //     return res.redirect("/user/login")
+    // }
 
     res.render("user/profile",req.session.currentUser)
 });
