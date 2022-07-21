@@ -16,7 +16,7 @@ router.get("/", (req, res, next) => {
     next(error)
   })
 
- 
+
 });
 
 /* GET home page */
