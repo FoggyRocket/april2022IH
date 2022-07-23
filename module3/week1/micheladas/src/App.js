@@ -4,6 +4,7 @@ import { Pedido, Chelas } from "./Components";
 //utilerias ui-kit atomo
 import { Button } from "./Components/styledCompos";
 import "./App.css";
+import  { CommentsView }  from "./views/Comments";
 
 function App() {
   //hooks react
@@ -52,6 +53,11 @@ function App() {
         limon={false}
       />
       <Pedido {...pedido} />
+
+      {/* Esta es otra vista comentarios */}
+       <CommentsView />
+
+
     </div>
   );
 }
